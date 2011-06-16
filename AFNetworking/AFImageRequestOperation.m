@@ -67,7 +67,7 @@ static inline CGSize kAFImageRequestRoundedCornerRadii(CGSize imageSize) {
 	if([response isKindOfClass:[NSHTTPURLResponse class]]) {
 		[super connection:connection didReceiveResponse:response];
 	} else {
-		[super connection:connection didReceiveResponse:[[[NSHTTPURLResponse alloc] initWithURL:[response URL] MIMEType:[response MIMEType] expectedContentLength:[response expectedContentLength] textEncodingName:[response textEncodingName]] autorelease]];
+		[super connection:connection didReceiveResponse:[[[NSHTTPURLResponse alloc] initWithURL:[response URL] MIMEType:[response MIMEType] expectedContentLength:(NSUInteger)[response expectedContentLength] textEncodingName:[response textEncodingName]] autorelease]];
 	}
 }
 
