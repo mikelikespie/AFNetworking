@@ -25,11 +25,13 @@
 @interface AFCallback ()
 @property (readwrite, nonatomic, copy) id successBlock;
 @property (readwrite, nonatomic, copy) id errorBlock;
+@property (readwrite, nonatomic, copy) id startBlock;
 @end
 
 @implementation AFCallback
 @synthesize successBlock = _successBlock;
 @synthesize errorBlock = _errorBlock;
+@synthesize startBlock = _startBlock;
 
 + (id)callbackWithSuccess:(id)success {
 	return [self callbackWithSuccess:success error:nil];
@@ -39,6 +41,15 @@
 	id callback = [[[self alloc] init] autorelease];
 	[callback setSuccessBlock:success];
 	[callback setErrorBlock:error];
+	
+	return callback;
+}
+
++ (id)callbackWithSuccess:(id)success error:(id)error start:(id)start {
+	id callback = [[[self alloc] init] autorelease];
+	[callback setSuccessBlock:success];
+	[callback setErrorBlock:error];
+	[callback setStartBlock:start];
 	
 	return callback;
 }
@@ -54,6 +65,7 @@
 - (void)dealloc {
 	[_successBlock release];
 	[_errorBlock release];
+	[_startBlock release];
 	[super dealloc];
 }
 

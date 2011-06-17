@@ -25,12 +25,14 @@
 @protocol AFCallback <NSObject>
 + (id)callbackWithSuccess:(id)success;
 + (id)callbackWithSuccess:(id)success error:(id)error;
++ (id)callbackWithSuccess:(id)success error:(id)error start:(id)start;
 @end
 
 @interface AFCallback : NSObject <AFCallback> {
 @private
 	id _successBlock;
 	id _errorBlock;
+	id _startBlock;
 }
 
 @end

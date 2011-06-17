@@ -49,14 +49,17 @@ extern NSString * const AFHTTPOperationParsedDataErrorKey;
 
 typedef void (^AFHTTPOperationSuccessBlock)(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *data);
 typedef void (^AFHTTPOperationErrorBlock)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error);
+typedef void (^AFHTTPOperationStartBlock)();
 
 @protocol AFHTTPOperationCallback <NSObject>
 @optional
 + (id)callbackWithSuccess:(AFHTTPOperationSuccessBlock)success;
 + (id)callbackWithSuccess:(AFHTTPOperationSuccessBlock)success error:(AFHTTPOperationErrorBlock)error;
++ (id)callbackWithSuccess:(AFHTTPOperationSuccessBlock)success error:(AFHTTPOperationErrorBlock)error start:(AFHTTPOperationStartBlock)start;
 @end
 
 @interface AFHTTPOperationCallback : AFCallback <AFHTTPOperationCallback>
 @property (readwrite, nonatomic, copy) AFHTTPOperationSuccessBlock successBlock;
 @property (readwrite, nonatomic, copy) AFHTTPOperationErrorBlock errorBlock;
+@property (readwrite, nonatomic, copy) AFHTTPOperationStartBlock startBlock;
 @end

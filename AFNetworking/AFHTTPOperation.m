@@ -62,6 +62,10 @@ NSString * const AFHTTPOperationParsedDataErrorKey = @"com.alamofire.http-operat
 - (void)operationDidStart {
 	[super operationDidStart];
 	[[NSNotificationCenter defaultCenter] postNotificationName:AFHTTPOperationDidStartNotification object:self];
+    if(self.callback.startBlock) {
+        self.callback.startBlock();
+    }
+
 }
 
 - (void)finishWithError:(NSError *)error {
@@ -102,5 +106,5 @@ NSString * const AFHTTPOperationParsedDataErrorKey = @"com.alamofire.http-operat
 #pragma mark - AFHTTPOperationCallback
 
 @implementation AFHTTPOperationCallback
-@dynamic successBlock, errorBlock;
+@dynamic successBlock, errorBlock, startBlock;
 @end
